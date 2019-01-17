@@ -1,0 +1,7 @@
+Using Bean Factories
+
+The <bean /> element has more attributes and can also be used to declare beans that are created by a factory method or singleton objects. To use a singleton class to create a bean, the factory-method attribute is used, and its value will be the static method name that returns the bean instance.
+
+To use a factory object to create a bean, the factory-bean and factory-method attributes are used. As their so obvious names say, the first one points to the object used to create the bean, and the other specifies the method name that returns the actual result (not static in this case).
+
+Although it seems somewhat redundant, creating beans in this way might be useful when one is using third-party libraries that only allow creating objects using a factory class. Spring comes to the rescue in this case as well, by providing an interface named org.springframework.beans.factory.FactoryBean<T>. This is used by many Spring classes in order to simplify configuration. By implementing this interface, the factory beans will be automatically picked up by the Spring container, and the desired bean will be created by automatically calling the getObject method. Even if implementing your factories in this way ties your code to Spring components, which usually is recommended to be avoided.
